@@ -1,5 +1,3 @@
-// todo-item.component.ts
-
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TodoItem } from '../models/todo-item.model';
 import { TodoService } from '../todo.service';
@@ -13,7 +11,7 @@ import { TodoService } from '../todo.service';
 export class TodoItemComponent {
   @Input() item!: TodoItem;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService) {}
 
   onStatusChange(): void {
     this.todoService.changeTodoItemStatus(this.item.id, this.item.status);
@@ -23,5 +21,4 @@ export class TodoItemComponent {
     console.log('Удаляем запись с id:', this.item.id);
     this.todoService.deleteTodoItem(this.item.id);
   }
-
 }

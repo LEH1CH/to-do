@@ -14,19 +14,20 @@ export class TodoAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private todoService: TodoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Создаем форму с двумя полями: title и description
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.required],
-      description: ['']
+      description: [''],
     });
   }
 
   // Метод для добавления задачи
   onSubmit(): void {
-    if (this.todoForm.valid) { // Проверяем, что форма валидна
+    if (this.todoForm.valid) {
+      // Проверяем, что форма валидна
       const { title, description } = this.todoForm.value;
       this.todoService.addTodoItem(title, description); // Добавляем задачу
       this.todoForm.reset(); // Очищаем форму после отправки
