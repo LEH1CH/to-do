@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { TodoService } from './todo.service';
 import { AppComponent } from './app.component';
-import { TodolistComponent } from './todolist/todolist.component';
+import { TodoItemComponent } from './todo-item/todo-item.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoAddComponent } from './todo-add/todo-add.component';
+import { TodoSearchComponent } from './todo-search/todo-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodolistComponent
+    TodoItemComponent,
+    TodoListComponent,
+    TodoAddComponent,
+    TodoSearchComponent,
   ],
-  imports: [
-    FormsModule,
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [FormsModule, BrowserModule, ReactiveFormsModule],
+  providers: [TodoService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

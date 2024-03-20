@@ -1,1 +1,16 @@
-<app-todolist></app-todolist>
+<header>
+  <!-- Заголовок или шапка приложения -->
+  <h1>To-Do Лист</h1>
+</header>
+
+<main class="main">
+  <!-- Разметка для компонента списка to-do записей -->
+  <app-todo-search (searchFilters)="applyFilters($event.searchTerm, $event.selectedStatus)"></app-todo-search>
+  <app-todo-add></app-todo-add>
+  <app-todo-list [todoItems]="filteredTodoList"></app-todo-list>
+</main>
+
+<footer class="footer">
+  <!-- Подвал приложения -->
+  <p>Усманов Алексей</p>
+</footer>
