@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app/models/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { TodoService } from './todo.service';
 import { AppComponent } from './app.component';
@@ -18,7 +19,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     TodoSearchComponent,
     LoginPageComponent,
   ],
-  imports: [FormsModule, BrowserModule, ReactiveFormsModule],
+  imports: [FormsModule, BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [TodoService],
   bootstrap: [AppComponent],
 })
