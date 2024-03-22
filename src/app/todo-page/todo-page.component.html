@@ -1,0 +1,8 @@
+<main class="main">
+    <app-todo-search
+    (searchFilters)="applyFilters($event.searchTerm, $event.selectedStatus)"
+    (resetFilters)="resetFilters()"
+  ></app-todo-search>
+    <app-todo-add></app-todo-add>
+    <app-todo-list [todoItems]="filteredTodoList.length > 0 ? filteredTodoList : todoItems"></app-todo-list>
+  </main>

@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TodoItem, TodoService } from '../todo.service';
+import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-add',
   templateUrl: './todo-add.component.html',
   styleUrls: ['./todo-add.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoAddComponent implements OnInit {
+export class TodoAddComponent {
   todoForm!: FormGroup; // Объявляем форму FormGroup
 
   constructor(

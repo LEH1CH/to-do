@@ -1,16 +1,7 @@
 <header>
   <h1>To-Do Лист</h1>
-  <a routerLink="/login">Login</a>
 </header>
 <router-outlet></router-outlet>
-<main class="main">
-  <app-todo-search
-    (searchFilters)="applyFilters($event.searchTerm, $event.selectedStatus)"
-  ></app-todo-search>
-  <app-todo-add></app-todo-add>
-  <app-todo-list [todoItems]="filteredTodoList"></app-todo-list>
-</main>
-
 <footer class="footer">
   <p>Усманов Алексей</p>
 </footer>
