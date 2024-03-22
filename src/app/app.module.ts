@@ -7,6 +7,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TodoSearchComponent } from './todo-search/todo-search.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TodoSearchComponent } from './todo-search/todo-search.component';
     TodoListComponent,
     TodoAddComponent,
     TodoSearchComponent,
+    LoginPageComponent,
   ],
   imports: [FormsModule, BrowserModule, ReactiveFormsModule],
   providers: [TodoService],
