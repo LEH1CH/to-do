@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-todo-add',
   templateUrl: './todo-add.component.html',
-  styleUrls: ['./todo-add.component.css'],
+  styleUrls: ['./todo-add.component.scss'],
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoAddComponent implements OnInit {
