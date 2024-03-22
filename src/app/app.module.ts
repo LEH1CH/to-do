@@ -9,6 +9,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoAddComponent } from './todo-add/todo-add.component';
 import { TodoSearchComponent } from './todo-search/todo-search.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ProjectDescriptionPageComponent } from './project-description-page/project-description-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     TodoAddComponent,
     TodoSearchComponent,
     LoginPageComponent,
+    ProjectDescriptionPageComponent,
   ],
   imports: [FormsModule, BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [TodoService],
