@@ -11,6 +11,9 @@ import { TodoSearchComponent } from './todo-search/todo-search.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectDescriptionPageComponent } from './project-description-page/project-description-page.component';
 import { TodoPageComponent } from './todo-page/todo-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterPageComponent } from './register-page/register-page.component';
+
 
 @NgModule({
   declarations: [
@@ -22,9 +25,11 @@ import { TodoPageComponent } from './todo-page/todo-page.component';
     LoginPageComponent,
     ProjectDescriptionPageComponent,
     TodoPageComponent,
+    RegisterPageComponent,
+    LoginPageComponent
   ],
-  imports: [FormsModule, BrowserModule, ReactiveFormsModule, AppRoutingModule],
-  providers: [TodoService],
+  imports: [FormsModule, BrowserModule, ReactiveFormsModule, AppRoutingModule, HttpClientModule],
+  providers: [TodoService, LoginPageComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

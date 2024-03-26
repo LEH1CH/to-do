@@ -1,17 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
+  fio: string = '';
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    // Здесь будет ваш код для обработки логина
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+    const credentials = {
+      email: this.email,
+      password: this.password,
+      fio: this.fio,
+    };
+    this.authService.login(credentials).subscribe(
+      (response) => {
+        // Успешный вход, перенаправляем на страницу с записями
+        this.router.navigate(['/todo-list']);
+      },
+      (error) => {
+        // Ошибка входа, выводим сообщение об ошибке
+        this.errorMessage = error.message;
+      }
+    );
+  }
+  logout(): void {
+    this.authService.logout();
+    // После выхода перенаправляем на страницу логина
+    this.router.navigate(['/login']);
+    // Проверяем, что токен удален из локального хранилища
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.log('Токен успешно удален');
+    } else {
+        console.log('Ошибка: токен не удален');
+    }
   }
 }

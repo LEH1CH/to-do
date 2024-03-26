@@ -5,5 +5,5 @@
 ></app-todo-search>
   <app-todo-add (addTodo)="onAddTodo($event)"></app-todo-add>
   <app-todo-list [todoItems]="filteredTodoList.length > 0 ? filteredTodoList : todoItems"></app-todo-list>
-  <a routerLink="/login">Login</a>
+  <button (click)="logout()">Logout</button>
 </main>

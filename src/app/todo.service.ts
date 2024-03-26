@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoItem, TodoStatus } from './models/todo-item.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,14 @@ export class TodoService {
   private todoList: TodoItem[] = [];
   private filteredTodoList: TodoItem[] = [];
 
-  constructor() {}
+
+  constructor(private http: HttpClient) {}
+
+
+  // Метод для загрузки данных из JSON файла
+  /* fetchTodoList(): Observable<TodoItem[]> {
+    return this.http.get<TodoItem[]>('assets/todo-list.json');
+  } */
 
   // Метод для фильтрации списка задач по поисковому запросу и статусу
   filterTodoList(searchTerm: string, selectedStatus: string): TodoItem[] {
@@ -69,6 +78,7 @@ export class TodoService {
   // Получить весь список to-do записей
   getTodoList(): TodoItem[] {
     return this.todoList;
+    
   }
 }
 export { TodoItem };
