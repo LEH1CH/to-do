@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todo-search',
@@ -10,7 +10,7 @@ export class TodoSearchComponent {
   searchTerm: string = '';
   selectedStatus: string = '';
 
-  @Output() searchFilters = new EventEmitter<any>();
+  @Output() searchFilters = new EventEmitter<{ searchTerm: string, selectedStatus: string }>();
 
   applyFilters(): void {
     // Проверяем, есть ли подходящие задачи перед применением фильтрации

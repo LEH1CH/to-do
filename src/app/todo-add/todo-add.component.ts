@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TodoAddComponent {
   todoForm!: FormGroup; // Объявляем форму FormGroup
+
+  @Output() addTodo = new EventEmitter<{ title: string, description: string }>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +30,7 @@ export class TodoAddComponent {
     if (this.todoForm.valid) {
       // Проверяем, что форма валидна
       const { title, description } = this.todoForm.value;
-      this.todoService.addTodoItem(title, description); // Добавляем задачу
+      this.addTodo.emit({ title, description }); // Отправляем данные наружу через EventEmitter
       this.todoForm.reset(); // Очищаем форму после отправки
     }
   }

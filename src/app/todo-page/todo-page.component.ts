@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AppComponent } from '../app.component';
 import { TodoItem, TodoService } from '../todo.service';
 
 @Component({
@@ -30,5 +29,17 @@ export class TodoPageComponent {
 
   loadTodoList(): void {
     this.todoItems = this.todoService.getTodoList();
+  }
+
+  onAddTodo(newTodo: { title: string, description: string }): void {
+    // Добавляем новую задачу в список задач
+    this.todoService.addTodoItem(newTodo.title, newTodo.description);
+    // Обновляем список задач
+    this.loadTodoList();
+  }
+
+  onSearchFilters(filters: { searchTerm: string, selectedStatus: string }): void {
+    // Применяем полученные фильтры к списку задач
+    this.applyFilters(filters.searchTerm, filters.selectedStatus);
   }
 }
