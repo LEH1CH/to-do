@@ -39,9 +39,9 @@ export class TodoPageComponent {
     this.loadTodoList();
   }
 
-  loadTodoList(): void {
+  /* loadTodoList(): void {
     this.todoItems = this.todoService.getTodoList();
-  }
+  } */
 
   /* oadTodoList(): void {
     // Вызываем метод fetchTodoList() из TodoService для загрузки списка задач из JSON файла
@@ -62,9 +62,10 @@ export class TodoPageComponent {
   onAddTodo(newTodo: { title: string; description: string }): void {
     // Добавляем новую задачу в список задач
     this.todoService.addTodoItem(newTodo.title, newTodo.description);
-    // Обновляем список задач
-    this.loadTodoList();
+    // Обновляем список задач из сервиса
+    this.todoItems = this.todoService.getTodoList();
   }
+  
 
   onSearchFilters(filters: {
     searchTerm: string;
@@ -72,6 +73,19 @@ export class TodoPageComponent {
   }): void {
     // Применяем полученные фильтры к списку задач
     this.applyFilters(filters.searchTerm, filters.selectedStatus);
+  }
+
+  loadTodoList(): void {
+    // Загружаем задачи из JSON файла и добавляем их в список задач
+    this.todoService.loadTodoListFromJson().subscribe(
+      (todoListFromJson: TodoItem[]) => {
+        this.todoService.addTodoItemsFromJson(todoListFromJson);
+        this.todoItems = this.todoService.getTodoList();
+      },
+      error => {
+        console.error('Error loading todo list from JSON:', error);
+      }
+    );
   }
 
   logout(): void {

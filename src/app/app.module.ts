@@ -11,9 +11,10 @@ import { TodoSearchComponent } from './todo-search/todo-search.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectDescriptionPageComponent } from './project-description-page/project-description-page.component';
 import { TodoPageComponent } from './todo-page/todo-page.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterPageComponent } from './register-page/register-page.component';
-
+import { TokenInterceptor } from './http-interceptors/todo-interceptor';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,25 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     ProjectDescriptionPageComponent,
     TodoPageComponent,
     RegisterPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    NavbarComponent,
   ],
-  imports: [FormsModule, BrowserModule, ReactiveFormsModule, AppRoutingModule, HttpClientModule],
-  providers: [TodoService, LoginPageComponent],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    TodoService,
+    LoginPageComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoItem, TodoStatus } from './models/todo-item.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,10 @@ import { Observable } from 'rxjs';
 export class TodoService {
   private todoList: TodoItem[] = [];
   private filteredTodoList: TodoItem[] = [];
-
-
+  private todoListUrl: string = 'assets/todo-list.json';
+  private todoItemsLoaded: boolean = false;
   constructor(private http: HttpClient) {}
 
-
-  // Метод для загрузки данных из JSON файла
-  /* fetchTodoList(): Observable<TodoItem[]> {
-    return this.http.get<TodoItem[]>('assets/todo-list.json');
-  } */
 
   // Метод для фильтрации списка задач по поисковому запросу и статусу
   filterTodoList(searchTerm: string, selectedStatus: string): TodoItem[] {
@@ -78,8 +73,31 @@ export class TodoService {
   // Получить весь список to-do записей
   getTodoList(): TodoItem[] {
     return this.todoList;
-    
   }
+
+  // Метод для загрузки задач из JSON файла
+  loadTodoListFromJson(): Observable<TodoItem[]> {
+    if (!this.todoItemsLoaded) { 
+      return this.http.get<TodoItem[]>(this.todoListUrl).pipe(
+        tap(todoItems => {
+          this.addTodoItemsFromJson(todoItems); // Добавляем задачи в список
+          this.todoItemsLoaded = true; // Устанавливаем флаг, что данные уже загружены
+        })
+      );
+    } else {
+      return of(this.todoList); // Используем of для создания Observable
+    }
+  }
+
+  // Метод для добавления задач из JSON файла в список задач
+  addTodoItemsFromJson(todoItems: TodoItem[]): void {
+    // Очищаем текущий список задач перед добавлением новых задач из JSON файла
+    this.todoList = [];
+    // Добавляем задачи из JSON файла в список задач
+    this.todoList.push(...todoItems);
+    this.todoItemsLoaded = true;
+  }
+  
 }
 export { TodoItem };
 

@@ -23,7 +23,8 @@ export class LoginPageComponent {
     };
     this.authService.login(credentials).subscribe(
       (response) => {
-        // Успешный вход, перенаправляем на страницу с записями
+        // Успешный вход, устанавливаем флаг залогиненности и перенаправляем на страницу с записями
+        this.authService.setLoggedIn(true);
         this.router.navigate(['/todo-list']);
       },
       (error) => {
@@ -32,16 +33,19 @@ export class LoginPageComponent {
       }
     );
   }
+
   logout(): void {
-    this.authService.logout();
-    // После выхода перенаправляем на страницу логина
-    this.router.navigate(['/login']);
-    // Проверяем, что токен удален из локального хранилища
-    const token = localStorage.getItem('token');
-    if (!token) {
-        console.log('Токен успешно удален');
-    } else {
-        console.log('Ошибка: токен не удален');
-    }
+  this.authService.logout();
+  this.authService.setLoggedIn(false); // Устанавливаем флаг залогиненности в false
+  // После выхода перенаправляем на страницу логина
+  this.router.navigate(['/login']);
+  // Проверяем, что токен удален из локального хранилища
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.log('Токен успешно удален');
+  } else {
+    console.log('Ошибка: токен не удален');
   }
+}
+
 }
