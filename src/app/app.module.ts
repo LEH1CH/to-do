@@ -15,6 +15,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { TokenInterceptor } from './http-interceptors/todo-interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarMeetupComponent } from './navbar-meetup/navbar-meetup.component';
+import { UsersComponent } from './users/users.component';
+import { MyMeetupsComponent } from './my-meetups/my-meetups.component';
+import { MeetupListComponent } from './meetup-list/meetup-list.component';
+import { MeetupItemComponent } from './meetup-item/meetup-item.component';
+import { MeetupAddComponent } from './meetup-add/meetup-add.component';
+import { MeetupEditComponent } from './meetup-edit/meetup-edit.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +37,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     RegisterPageComponent,
     LoginPageComponent,
     NavbarComponent,
+    NavbarMeetupComponent,
+    UsersComponent,
+    MyMeetupsComponent,
+    MeetupListComponent,
+    MeetupItemComponent,
+    MeetupAddComponent,
+    MeetupEditComponent,
+    ModalComponent,
   ],
   imports: [
     FormsModule,
@@ -45,6 +61,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     },
     TodoService,
     LoginPageComponent,
+    MeetupListComponent
   ],
   bootstrap: [AppComponent],
 })

@@ -5,14 +5,18 @@ import { ProjectDescriptionPageComponent } from '../project-description-page/pro
 import { TodoPageComponent } from '../todo-page/todo-page.component';
 import { RegisterPageComponent } from '../register-page/register-page.component';
 import { AuthGuard } from '../auth.guard';
+import { MyMeetupsComponent } from '../my-meetups/my-meetups.component';
+import { UsersComponent } from '../users/users.component';
 
 const routes: Routes = [
   { path: 'project-description', component: ProjectDescriptionPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'todo-list', component: TodoPageComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/project-description', pathMatch: 'full' },
-  { path: '**', redirectTo: '/project-description' }
+  { path: 'my-meetups', component: MyMeetupsComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
   // Добавьте другие маршруты здесь, если это необходимо
 ];
 
