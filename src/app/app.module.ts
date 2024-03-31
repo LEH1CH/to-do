@@ -23,6 +23,8 @@ import { MeetupItemComponent } from './meetup-item/meetup-item.component';
 import { MeetupAddComponent } from './meetup-add/meetup-add.component';
 import { MeetupEditComponent } from './meetup-edit/meetup-edit.component';
 import { ModalComponent } from './modal/modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ModalComponent } from './modal/modal.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

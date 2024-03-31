@@ -8,9 +8,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Meetup } from '../models/meetup.model';
-import { MeetupService } from '../meetup.service';
 import { MeetupEditComponent } from '../meetup-edit/meetup-edit.component';
-import { ModalService } from '../modal.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-meetup-item',
@@ -23,18 +22,19 @@ export class MeetupItemComponent implements OnInit {
   @ViewChild('modalContainer', { read: ViewContainerRef })
   modalContainer!: ViewContainerRef;
 
-  constructor(private modalService: ModalService) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   editMeetup(meetup: Meetup): void {
-    if (!meetup) {
-      console.error('Meetup object is undefined or null.');
-      return;
-    }
-    const containerRef = this.modalContainer;
-    const componentRef = this.modalService.open(MeetupEditComponent, containerRef);
-    // Передаем митап в компонент MeetupEditComponent
-    componentRef.instance.meetup = meetup;
+    const dialogRef = this.dialog.open(MeetupEditComponent, {
+      width: '400px',
+      data: meetup
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // Обработка закрытия модального окна
+    });
   }
 }
