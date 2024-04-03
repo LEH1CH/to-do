@@ -11,7 +11,7 @@ export class AuthGuard  {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn) {
       return true; // Разрешаем доступ, если пользователь залогинен
     } else {
       this.router.navigate(['/login']); // Перенаправляем незалогиненных пользователей на страницу логина

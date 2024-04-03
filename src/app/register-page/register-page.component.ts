@@ -1,11 +1,13 @@
 // register-page.component.ts
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+  
 })
 export class RegisterPageComponent {
   email: string = '';

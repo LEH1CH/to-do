@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TodoItem, TodoService } from '../todo.service';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-todo-page',
   templateUrl: './todo-page.component.html',
   styleUrls: ['./todo-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoPageComponent {
   todoItems: TodoItem[] = [];
@@ -15,8 +17,6 @@ export class TodoPageComponent {
 
   constructor(
     private todoService: TodoService,
-    private authService: AuthService,
-    private router: Router,
     private loginPageComponent: LoginPageComponent
   ) {}
 
@@ -32,40 +32,16 @@ export class TodoPageComponent {
   }
 
   ngOnInit(): void {
-    // Загружаем список задач из JSON файла только если он пустой
-    /* if (this.todoItems.length === 0) {
-      this.loadTodoList();
-    } */
     this.loadTodoList();
   }
-
-  /* loadTodoList(): void {
-    this.todoItems = this.todoService.getTodoList();
-  } */
-
-  /* oadTodoList(): void {
-    // Вызываем метод fetchTodoList() из TodoService для загрузки списка задач из JSON файла
-    this.todoService.fetchTodoList().subscribe(
-      (todoList: TodoItem[]) => {
-        // Проверяем, что список задач пустой, и добавляем задачи только в этом случае
-        if (this.todoItems.length === 0) {
-          this.todoItems = todoList;
-        }
-      },
-      (error) => {
-        // Обработка ошибки загрузки списка задач из JSON файла
-        console.error('Error loading todo list:', error);
-      }
-    );
-  } */
 
   onAddTodo(newTodo: { title: string; description: string }): void {
     // Добавляем новую задачу в список задач
     this.todoService.addTodoItem(newTodo.title, newTodo.description);
-    // Обновляем список задач из сервиса
+    // Обновляем список задач
     this.todoItems = this.todoService.getTodoList();
+    this.loadTodoList();
   }
-  
 
   onSearchFilters(filters: {
     searchTerm: string;
@@ -81,8 +57,9 @@ export class TodoPageComponent {
       (todoListFromJson: TodoItem[]) => {
         this.todoService.addTodoItemsFromJson(todoListFromJson);
         this.todoItems = this.todoService.getTodoList();
+        this.loadTodoList();
       },
-      error => {
+      (error) => {
         console.error('Error loading todo list from JSON:', error);
       }
     );

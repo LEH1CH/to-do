@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private baseUrl: string = environment.apiUrl;
   private tokenKey = 'auth_token';
-  isLoggedInFlag!: boolean;
+  private _isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +24,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    this.isLoggedIn = false;
   }
 
   getToken(): string | null {
@@ -38,13 +39,13 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}/user`);
   }
 
-  // Метод для установки флага залогиненности пользователя
-  setLoggedIn(value: boolean): void {
-    this.isLoggedInFlag = value;
+  // Геттер для получения значения флага залогиненности
+  get isLoggedIn(): boolean {
+    return this._isLoggedIn;
   }
 
-  // Метод для проверки, залогинен ли пользователь
-  isLoggedIn(): boolean {
-    return this.isLoggedInFlag;
+  // Сеттер для установки значения флага залогиненности
+  set isLoggedIn(value: boolean) {
+    this._isLoggedIn = value;
   }
 }
