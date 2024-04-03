@@ -16,8 +16,8 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Получаем токен пользователя из сервиса AuthService
-    const token = this.authService.getToken();
+    // Получаем токен пользователя из сервиса AuthService с использованием геттера
+    const token = this.authService.token;
 
     // Клонируем и модифицируем запрос, добавляя токен в заголовок Authorization, если он есть
     if (token) {

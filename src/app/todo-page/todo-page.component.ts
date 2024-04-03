@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { TodoItem, TodoService } from '../todo.service';
 import { LoginPageComponent } from '../login-page/login-page.component';
-import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-todo-page',
@@ -17,7 +14,8 @@ export class TodoPageComponent {
 
   constructor(
     private todoService: TodoService,
-    private loginPageComponent: LoginPageComponent
+    private loginPageComponent: LoginPageComponent,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   applyFilters(searchTerm: string, selectedStatus: string): void {
@@ -57,7 +55,7 @@ export class TodoPageComponent {
       (todoListFromJson: TodoItem[]) => {
         this.todoService.addTodoItemsFromJson(todoListFromJson);
         this.todoItems = this.todoService.getTodoList();
-        this.loadTodoList();
+        this.cdRef.detectChanges();
       },
       (error) => {
         console.error('Error loading todo list from JSON:', error);

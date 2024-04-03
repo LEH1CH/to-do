@@ -27,12 +27,16 @@ export class AuthService {
     this.isLoggedIn = false;
   }
 
-  getToken(): string | null {
+  get token(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
-  setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+  set token(token: string | null) {
+    if (token) {
+      localStorage.setItem(this.tokenKey, token);
+    } else {
+      localStorage.removeItem(this.tokenKey);
+    }
   }
 
   getCurrentUser(): Observable<any> {

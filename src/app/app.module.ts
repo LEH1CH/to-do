@@ -45,6 +45,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     },
     TodoService,
     LoginPageComponent,
+    TodoPageComponent,
   ],
   bootstrap: [AppComponent],
 })
